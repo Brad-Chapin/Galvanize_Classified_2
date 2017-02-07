@@ -26,6 +26,6 @@
   <p ng-model="searchText.description">{{post.description}}</p>
   <p>${{post.price}}</p>
   <img src="{{post.item_image}}" alt="a picture of the thing">
-    <p><a href="#">edit post</a></p>
+    <p><a ng-click="$ctrl.editPost()" href="#">edit post</a> <a ng-click="$ctrl.deletePost(post)" href="#">delete post</a></p>
     <hr>
 </div>

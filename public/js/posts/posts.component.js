@@ -28,7 +28,17 @@
       });
     }
 
-    function deletePost () {}
+    function deletePost (post) {
+      event.preventDefault();
+      $http.delete("api/classifieds" + post.id)
+      .then (function (response){
+        function findPost (e) {
+          return e.id == post.id;
+        }
+        let toDelete = vm.posts.findIndex(findPost);
+        vm.posts.splice (toDelete, 1);
+      });
+    }
 
     function editPost () {}
   }
