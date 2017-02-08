@@ -30,7 +30,7 @@
 
     function deletePost (post) {
       event.preventDefault();
-      $http.delete("api/classifieds" + post.id)
+      $http.delete("api/classifieds/" + post.id)
       .then (function (response){
         function findPost (e) {
           return e.id == post.id;
@@ -40,6 +40,35 @@
       });
     }
 
-    function editPost () {}
+    function editPost (post) {
+      event.preventDefault();
+      vm.changePost = {};
+      vm.changePost.id = post.id;
+      vm.changePost.title = vm.newTitle;
+      vm.changePost.description = vm.newDescription;
+      vm.changePost.price = vm.newPrice;
+      vm.changePost.item_image = vm.newItem_image;
+      updatePost();
+    }
+    function updatePost () {
+      $http.patch("/api/classifieds/" + vm.changePost.id,
+      {
+        title: vm.changePost.title,
+        description: vm.changePost.description,
+        price: vm.changePost.price,
+        item_image: vm.changePost.item_image
+      }
+    )
+    .then(function (response){
+      let data = response.data;
+      function findPost (e){
+        return e.id == data.id;
+      }
+      let old = vm.posts.find(findPost);
+      Object.assign(old, data);
+      delete vm.changePost;
+      vm.toggle = !vm.toggle;
+    });
+    }
   }
 })();

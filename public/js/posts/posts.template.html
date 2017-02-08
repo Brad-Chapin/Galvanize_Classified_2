@@ -26,6 +26,26 @@
   <p ng-model="searchText.description">{{post.description}}</p>
   <p>${{post.price}}</p>
   <img src="{{post.item_image}}" alt="a picture of the thing">
-    <p><a ng-click="$ctrl.editPost()" href="#">edit post</a> <a ng-click="$ctrl.deletePost(post)" href="#">delete post</a></p>
+    <p><a ng-click="$ctrl.toggle = !$ctrl.toggle" href="#">edit post</a> <a ng-click="$ctrl.deletePost(post)" href="#">delete post</a></p>
+    <!-- edit form, toggles on edit button click -->
+    <form ng-if="$ctrl.toggle" ng-submit="$ctrl.editPost(post)">
+    <div>
+      <label for="newTitle">Title</label>
+      <input type="text" id="newTitle" name="newTitle" ng-model="$ctrl.newTitle">
+    </div>
+    <div>
+      <label for="newDescription">Description</label>
+      <input type="text" id="newDescription" name="newDescription" ng-model="$ctrl.newDescription">
+    </div>
+    <div>
+      <label for="newPrice">Price</label>
+      <input type="text" id="newPrice" name="newPrice" ng-model="$ctrl.newPrice">
+    </div>
+    <div>
+    <label for="newItem_image">Item Image</label>
+    <input type="url" id="newItem_image" name="newItem_image" ng-model="$ctrl.newItem_image">
+    </div>
+    <button type="submit">Submit your changes</button>
+    </form>
     <hr>
 </div>
