@@ -11,12 +11,12 @@
     vm.submitPost = submitPost;
     vm.deletePost = deletePost;
     vm.editPost = editPost;
+    vm.sortSelect = sortSelect;
 
     vm.$onInit = function () {
       $http.get("/api/classifieds")
       .then(function (response){
         vm.posts = response.data;
-        console.log(response.data);
       });
     }
 
@@ -69,6 +69,23 @@
       delete vm.changePost;
       vm.toggle = !vm.toggle;
     });
+    }
+
+    function sortSelect (sort){
+      switch (sort) {
+        case 'expensive':
+          vm.sort = "-price";
+          break;
+        case 'cheap':
+          vm.sort = 'price';
+          break;
+        case 'new':
+          vm.sort = '-created_at';
+          break;
+        case 'old':
+          vm.sort = 'created_at';
+          break;
+      }
     }
   }
 })();

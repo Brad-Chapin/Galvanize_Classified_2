@@ -7,7 +7,7 @@ const knex = require('../knex');
 
 router.get("/", (req, res, next) => {
   knex("classifieds")
-  .select("id", "title", "description", "price", "item_image").from("classifieds")
+  // .select("id", "title", "description", "price", "item_image").from("classifieds")
   .then((classifieds) => {
     res.send(classifieds);
   })
@@ -21,7 +21,7 @@ router.get("/:id", (req, res, next) => {
   knex("classifieds")
   .where("id", req.params.id)
   .first()
-  .select("id", "title", "description", "price", "item_image").from("classifieds")
+  // .select("id", "title", "description", "price", "item_image").from("classifieds")
   .then((classifieds) => {
     if (!classifieds) {
       return next ();
@@ -41,7 +41,7 @@ router.post("/", (req, res, next) => {
     price: req.body.price,
     item_image: req.body.item_image
   }, "*")
-  .select("id", "title", "description", "price", "item_image").from("classifieds")
+  // .select("id", "title", "description", "price", "item_image").from("classifieds")
   .then((classifieds) => {
     delete classifieds[0].created_at;
     delete classifieds[0].updated_at;
@@ -70,8 +70,8 @@ router.patch("/:id", (req, res, next) => {
     .where("id", req.params.id)
   })
   .then((classifieds) => {
-    delete classifieds[0].created_at;
-    delete classifieds[0].updated_at;
+    // delete classifieds[0].created_at;
+    // delete classifieds[0].updated_at;
     res.send(classifieds[0]);
   })
   .catch((err) => {
@@ -93,8 +93,8 @@ router.delete("/:id", (req, res, next) => {
     .del()
     .where("id", req.params.id)
     .then((row) => {
-      delete classifieds.created_at;
-      delete classifieds.updated_at;
+      // delete classifieds.created_at;
+      // delete classifieds.updated_at;
       res.json(classifieds);
     })
   })
